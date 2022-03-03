@@ -180,6 +180,7 @@
 			this.Start.Size = new System.Drawing.Size(23, 22);
 			this.Start.Text = "Start";
 			this.Start.ToolTipText = "Start";
+			this.Start.Click += new System.EventHandler(this.Start_Click);
 			// 
 			// Pause
 			// 
@@ -189,6 +190,7 @@
 			this.Pause.Name = "Pause";
 			this.Pause.Size = new System.Drawing.Size(23, 22);
 			this.Pause.Text = "Pause";
+			this.Pause.Click += new System.EventHandler(this.Pause_Click);
 			// 
 			// Next
 			// 
@@ -198,6 +200,7 @@
 			this.Next.Name = "Next";
 			this.Next.Size = new System.Drawing.Size(23, 22);
 			this.Next.Text = "Next";
+			this.Next.Click += new System.EventHandler(this.Next_Click);
 			// 
 			// graphicsPanel1
 			// 

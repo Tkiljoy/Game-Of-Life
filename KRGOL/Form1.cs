@@ -28,11 +28,6 @@ namespace KRGOL
 		public Form1()
 		{
 			InitializeComponent();
-
-			// Setup the timer
-			timer.Interval = 100; // milliseconds
-			timer.Tick += Timer_Tick;
-			timer.Enabled = true; // start timer running
 		}
 
 		// Calculate the next generation of cells
@@ -181,5 +176,22 @@ namespace KRGOL
 			return count;
 		}
 
+		private void Start_Click(object sender, EventArgs e)
+		{
+			// Setup the timer
+			timer.Interval = 100; // milliseconds
+			timer.Tick += Timer_Tick;
+			timer.Enabled = true; // start timer running
+		}
+
+		private void Pause_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void Next_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
