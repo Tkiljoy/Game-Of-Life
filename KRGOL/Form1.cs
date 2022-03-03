@@ -193,6 +193,12 @@ namespace KRGOL
 
 		private void Next_Click(object sender, EventArgs e)
 		{
+			if(isPaused)
+			{
+				generations = generations + 1;
+				toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+			}
+			
 
 		}
 	}
