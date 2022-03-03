@@ -14,6 +14,8 @@ namespace KRGOL
 	{
 		// The universe array
 		bool[,] universe = new bool[5, 5];
+		// Paused Bool
+		bool isPaused  = false;
 
 		// Drawing colors
 		Color gridColor = Color.Black;
@@ -33,8 +35,6 @@ namespace KRGOL
 		// Calculate the next generation of cells
 		private void NextGeneration()
 		{
-
-
 			// Increment generation count
 			generations++;
 
@@ -46,6 +46,7 @@ namespace KRGOL
 		private void Timer_Tick(object sender, EventArgs e)
 		{
 			NextGeneration();
+			
 		}
 
 		private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
@@ -178,7 +179,7 @@ namespace KRGOL
 
 		private void Start_Click(object sender, EventArgs e)
 		{
-			// Setup the timer
+			isPaused = false;
 			timer.Interval = 100; // milliseconds
 			timer.Tick += Timer_Tick;
 			timer.Enabled = true; // start timer running
@@ -186,7 +187,8 @@ namespace KRGOL
 
 		private void Pause_Click(object sender, EventArgs e)
 		{
-
+			isPaused = true;
+			timer.Enabled=false;
 		}
 
 		private void Next_Click(object sender, EventArgs e)
