@@ -35,6 +35,33 @@ namespace KRGOL
 		// Calculate the next generation of cells
 		private void NextGeneration()
 		{
+			bool[,] newGrid = new bool[5, 5];
+			for(int i = 0;i < universe.GetLength(0); i++)
+			{
+				for(int j = 0; j < universe.GetLength(1);j++)
+				{
+					int count = CountNeighborsFinite(i, j);
+					if(universe[i,j])
+					{
+						if(count == 2 || count == 3)
+						{
+							newGrid[i, j] = true;
+						}
+						if(count < 2 || count > 3)
+						{
+							newGrid[i, j] = false;
+						}
+					}
+					else
+					{
+						if(count == 3)
+						{
+							newGrid[i, j] = true;
+						}
+					}
+				}
+			}
+			universe = newGrid;
 			// Increment generation count
 			generations++;
 
