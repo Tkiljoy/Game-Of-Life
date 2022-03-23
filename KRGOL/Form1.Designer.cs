@@ -40,12 +40,19 @@
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.speedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-			this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
 			this.Start = new System.Windows.Forms.ToolStripButton();
 			this.Pause = new System.Windows.Forms.ToolStripButton();
 			this.Next = new System.Windows.Forms.ToolStripButton();
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
+			this.verySlowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.slowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.normalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.veryFastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.superFastToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.graphicsPanel1 = new KRGOL.GraphicsPanel();
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
@@ -56,7 +63,8 @@
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.toolsToolStripMenuItem,
+            this.speedToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(573, 24);
@@ -143,6 +151,19 @@
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
 			this.optionsToolStripMenuItem.Text = "&Options";
 			// 
+			// speedToolStripMenuItem
+			// 
+			this.speedToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.verySlowToolStripMenuItem,
+            this.slowToolStripMenuItem,
+            this.normalToolStripMenuItem,
+            this.fastToolStripMenuItem,
+            this.veryFastToolStripMenuItem,
+            this.superFastToolStripMenuItem});
+			this.speedToolStripMenuItem.Name = "speedToolStripMenuItem";
+			this.speedToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+			this.speedToolStripMenuItem.Text = "Speed";
+			// 
 			// toolStrip1
 			// 
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -154,22 +175,6 @@
 			this.toolStrip1.Size = new System.Drawing.Size(573, 25);
 			this.toolStrip1.TabIndex = 1;
 			this.toolStrip1.Text = "toolStrip1";
-			// 
-			// statusStrip1
-			// 
-			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelGenerations});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 323);
-			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(573, 22);
-			this.statusStrip1.TabIndex = 2;
-			this.statusStrip1.Text = "statusStrip1";
-			// 
-			// toolStripStatusLabelGenerations
-			// 
-			this.toolStripStatusLabelGenerations.Name = "toolStripStatusLabelGenerations";
-			this.toolStripStatusLabelGenerations.Size = new System.Drawing.Size(90, 17);
-			this.toolStripStatusLabelGenerations.Text = "Generations = 0";
 			// 
 			// Start
 			// 
@@ -201,6 +206,64 @@
 			this.Next.Size = new System.Drawing.Size(23, 22);
 			this.Next.Text = "Next";
 			this.Next.Click += new System.EventHandler(this.Next_Click);
+			// 
+			// statusStrip1
+			// 
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabelGenerations});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 323);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(573, 22);
+			this.statusStrip1.TabIndex = 2;
+			this.statusStrip1.Text = "statusStrip1";
+			// 
+			// toolStripStatusLabelGenerations
+			// 
+			this.toolStripStatusLabelGenerations.Name = "toolStripStatusLabelGenerations";
+			this.toolStripStatusLabelGenerations.Size = new System.Drawing.Size(90, 17);
+			this.toolStripStatusLabelGenerations.Text = "Generations = 0";
+			// 
+			// verySlowToolStripMenuItem
+			// 
+			this.verySlowToolStripMenuItem.Name = "verySlowToolStripMenuItem";
+			this.verySlowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.verySlowToolStripMenuItem.Text = "Very Slow";
+			this.verySlowToolStripMenuItem.Click += new System.EventHandler(this.verySlowToolStripMenuItem_Click);
+			// 
+			// slowToolStripMenuItem
+			// 
+			this.slowToolStripMenuItem.Name = "slowToolStripMenuItem";
+			this.slowToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.slowToolStripMenuItem.Text = "Slow";
+			this.slowToolStripMenuItem.Click += new System.EventHandler(this.slowToolStripMenuItem_Click);
+			// 
+			// normalToolStripMenuItem
+			// 
+			this.normalToolStripMenuItem.Name = "normalToolStripMenuItem";
+			this.normalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.normalToolStripMenuItem.Text = "Normal";
+			this.normalToolStripMenuItem.Click += new System.EventHandler(this.normalToolStripMenuItem_Click);
+			// 
+			// fastToolStripMenuItem
+			// 
+			this.fastToolStripMenuItem.Name = "fastToolStripMenuItem";
+			this.fastToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.fastToolStripMenuItem.Text = "Fast";
+			this.fastToolStripMenuItem.Click += new System.EventHandler(this.fastToolStripMenuItem_Click);
+			// 
+			// veryFastToolStripMenuItem
+			// 
+			this.veryFastToolStripMenuItem.Name = "veryFastToolStripMenuItem";
+			this.veryFastToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.veryFastToolStripMenuItem.Text = "Very Fast";
+			this.veryFastToolStripMenuItem.Click += new System.EventHandler(this.veryFastToolStripMenuItem_Click);
+			// 
+			// superFastToolStripMenuItem
+			// 
+			this.superFastToolStripMenuItem.Name = "superFastToolStripMenuItem";
+			this.superFastToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.superFastToolStripMenuItem.Text = "Sonic Speed";
+			this.superFastToolStripMenuItem.Click += new System.EventHandler(this.superFastToolStripMenuItem_Click);
 			// 
 			// graphicsPanel1
 			// 
@@ -256,6 +319,13 @@
 		private System.Windows.Forms.ToolStripButton Start;
 		private System.Windows.Forms.ToolStripButton Pause;
 		private System.Windows.Forms.ToolStripButton Next;
+		private System.Windows.Forms.ToolStripMenuItem speedToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem verySlowToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem slowToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem normalToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem fastToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem veryFastToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem superFastToolStripMenuItem;
 	}
 }
 

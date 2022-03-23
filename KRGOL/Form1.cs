@@ -235,5 +235,35 @@ namespace KRGOL
 			
 
 		}
+
+		private void superFastToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			timer.Interval = 1000 / 64;
+		}
+
+		private void verySlowToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			timer.Interval = 1000 / 2;
+		}
+
+		private void slowToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			timer.Interval = 1000 / 4;
+		}
+
+		private void normalToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			timer.Interval = 1000 / 8;
+		}
+
+		private void fastToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			timer.Interval = 1000 / 16;
+		}
+
+		private void veryFastToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			timer.Interval = 1000 / 32;
+		}
 	}
 }
