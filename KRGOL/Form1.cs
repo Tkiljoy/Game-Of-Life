@@ -14,6 +14,9 @@ namespace KRGOL
 	{
 		// The universe array
 		bool[,] universe = new bool[5, 5];
+
+		Random randomGenerator = new Random();
+
 		// Paused Bool
 		bool isPaused  = false;
 
@@ -73,7 +76,8 @@ namespace KRGOL
 		private void Timer_Tick(object sender, EventArgs e)
 		{
 			NextGeneration();
-			
+			Refresh();
+
 		}
 
 		private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
@@ -160,6 +164,9 @@ namespace KRGOL
 
 			// Tell Windows you need to repaint
 			graphicsPanel1.Invalidate();
+			generations = 0;
+			toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+
 		}
 		private int CountNeighborsFinite(int x, int y)
 		{
@@ -207,7 +214,7 @@ namespace KRGOL
 		private void Start_Click(object sender, EventArgs e)
 		{
 			isPaused = false;
-			timer.Interval = 100; // milliseconds
+			timer.Interval = 1000 / 8; // milliseconds
 			timer.Tick += Timer_Tick;
 			timer.Enabled = true; // start timer running
 		}
