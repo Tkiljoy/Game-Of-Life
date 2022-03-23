@@ -15,8 +15,6 @@ namespace KRGOL
 		// The universe array
 		bool[,] universe = new bool[5, 5];
 
-		Random randomGenerator = new Random();
-
 		// Paused Bool
 		bool isPaused  = false;
 
@@ -46,6 +44,7 @@ namespace KRGOL
 					int count = CountNeighborsFinite(i, j);
 					if(universe[i,j])
 					{
+						//Rules
 						if(count == 2 || count == 3)
 						{
 							newGrid[i, j] = true;
@@ -236,6 +235,7 @@ namespace KRGOL
 
 		}
 
+		//Time Values
 		private void superFastToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			timer.Interval = 1000 / 64;
