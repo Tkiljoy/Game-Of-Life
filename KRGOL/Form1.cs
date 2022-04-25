@@ -17,7 +17,7 @@ namespace KRGOL
 		bool[,] universe = new bool[5, 5];
 
 		// Paused Bool
-		bool isPaused  = false;
+		bool isPaused = false;
 
 		// Drawing colors
 		Color gridColor = Color.Black;
@@ -38,26 +38,26 @@ namespace KRGOL
 		private void NextGeneration()
 		{
 			bool[,] newGrid = new bool[5, 5];
-			for(int i = 0;i < universe.GetLength(0); i++)
+			for (int i = 0; i < universe.GetLength(0); i++)
 			{
-				for(int j = 0; j < universe.GetLength(1);j++)
+				for (int j = 0; j < universe.GetLength(1); j++)
 				{
 					int count = CountNeighborsFinite(i, j);
-					if(universe[i,j])
+					if (universe[i, j])
 					{
 						//Rules
-						if(count == 2 || count == 3)
+						if (count == 2 || count == 3)
 						{
 							newGrid[i, j] = true;
 						}
-						if(count < 2 || count > 3)
+						if (count < 2 || count > 3)
 						{
 							newGrid[i, j] = false;
 						}
 					}
 					else
 					{
-						if(count == 3)
+						if (count == 3)
 						{
 							newGrid[i, j] = true;
 						}
@@ -148,7 +148,7 @@ namespace KRGOL
 
 		private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
 		{
-			
+
 		}
 
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -185,7 +185,7 @@ namespace KRGOL
 						continue;
 					}
 					// if xCheck is less than 0 then continue
-					if(xCheck < 0)
+					if (xCheck < 0)
 					{
 						continue;
 					}
@@ -195,12 +195,12 @@ namespace KRGOL
 						continue;
 					}
 					// if xCheck is greater than or equal too xLen then continue
-					if(xCheck >= xLen)
+					if (xCheck >= xLen)
 					{
 						continue;
 					}
 					// if yCheck is greater than or equal too yLen then continue
-					if(yCheck >= yLen)
+					if (yCheck >= yLen)
 					{
 						continue;
 					}
@@ -212,18 +212,18 @@ namespace KRGOL
 		}
 
 		private void Randomize(bool isSeed)
-        {
+		{
 			Random rand = new Random();
 			for (int y = 0; y < universe.GetLength(1); y++)
 			{
 				for (int x = 0; x < universe.GetLength(0); x++)
 				{
 					if (isSeed)
-                    {
+					{
 
-                    }
-                    else
-                    {
+					}
+					else
+					{
 						int num = rand.Next(0, 2);
 						if (num == 0)
 						{
@@ -252,17 +252,17 @@ namespace KRGOL
 		private void Pause_Click(object sender, EventArgs e)
 		{
 			isPaused = true;
-			timer.Enabled=false;
+			timer.Enabled = false;
 		}
 
 		private void Next_Click(object sender, EventArgs e)
 		{
-			if(isPaused)
+			if (isPaused)
 			{
 				generations = generations + 1;
 				toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
 			}
-			
+
 
 		}
 
@@ -297,13 +297,13 @@ namespace KRGOL
 			timer.Interval = 1000 / 32;
 		}
 
-        private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+		private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
 			Randomize(false);
-        }
+		}
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
 			SaveFileDialog dlg = new SaveFileDialog();
 			dlg.Filter = "All Files|*.*|Cells|*.cells";
 			dlg.FilterIndex = 2; dlg.DefaultExt = "cells";
@@ -330,16 +330,16 @@ namespace KRGOL
 					{
 						// If the universe[x,y] is alive then append 'O' (capital O)
 						// to the row string.
-						if(universe[x,y] == true)
-                        {
+						if (universe[x, y] == true)
+						{
 							currentRow += "O";
-                        }
+						}
 						// Else if the universe[x,y] is dead then append '.' (period)
 						// to the row string.
 						else if (universe[x, y] == false)
-                        {
+						{
 							currentRow += ".";
-                        }
+						}
 					}
 
 					// Once the current row has been read through and the 
@@ -352,11 +352,12 @@ namespace KRGOL
 			}
 		}
 
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+		{
 			OpenFileDialog dlg = new OpenFileDialog();
 			dlg.Filter = "All Files|*.*|Cells|*.cells";
 			dlg.FilterIndex = 2;
+			int yPos = 0;
 
 			if (DialogResult.OK == dlg.ShowDialog())
 			{
@@ -375,16 +376,25 @@ namespace KRGOL
 
 					// If the row begins with '!' then it is a comment
 					// and should be ignored.
+					if (row.StartsWith("!") == true)
+					{
+						continue;
+					}
 
 					// If the row is not a comment then it is a row of cells.
 					// Increment the maxHeight variable for each row read.
-
 					// Get the length of the current row string
 					// and adjust the maxWidth variable if necessary.
+					else
+					{
+						maxHeight++;
+						maxWidth = row.Length;
+					}
 				}
 
 				// Resize the current universe and scratchPad
 				// to the width and height of the file calculated above.
+				universe = new bool[maxWidth, maxHeight];
 
 				// Reset the file pointer back to the beginning of the file.
 				reader.BaseStream.Seek(0, SeekOrigin.Begin);
@@ -397,22 +407,39 @@ namespace KRGOL
 
 					// If the row begins with '!' then
 					// it is a comment and should be ignored.
-
+					if (row.StartsWith("!") == true)
+					{
+						continue;
+					}
 					// If the row is not a comment then 
 					// it is a row of cells and needs to be iterated through.
-					for (int xPos = 0; xPos < row.Length; xPos++)
+					else
 					{
-						// If row[xPos] is a 'O' (capital O) then
-						// set the corresponding cell in the universe to alive.
+						for (int xPos = 0; xPos < row.Length; xPos++)
+						{
+							// If row[xPos] is a 'O' (capital O) then
+							// set the corresponding cell in the universe to alive.
+							if (row[xPos] == 'O')
+							{
+								universe[xPos, yPos] = true;
+							}
+							if (row[xPos] == '.')
+							{
+								universe[xPos, yPos] = false;
+							}
+						}
+						yPos++;
 
 						// If row[xPos] is a '.' (period) then
 						// set the corresponding cell in the universe to dead.
 					}
 				}
 
+
 				// Close the file.
 				reader.Close();
+				graphicsPanel1.Invalidate();
 			}
 		}
-    }
+	}
 }
