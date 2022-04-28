@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static KRGOL.RandomizeDialog;
+using static KRGOL.UniverseSize;
 
 namespace KRGOL
 {
@@ -29,6 +31,10 @@ namespace KRGOL
 		// Generation count
 		int generations = 0;
 
+		int Seed;
+		int width;
+		int height;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -37,7 +43,7 @@ namespace KRGOL
 		// Calculate the next generation of cells
 		private void NextGeneration()
 		{
-			bool[,] newGrid = new bool[5, 5];
+			bool[,] newGrid = new bool[width, height];
 			for (int i = 0; i < universe.GetLength(0); i++)
 			{
 				for (int j = 0; j < universe.GetLength(1); j++)
@@ -214,13 +220,24 @@ namespace KRGOL
 		private void Randomize(bool isSeed)
 		{
 			Random rand = new Random();
+			Random rand2 = new Random(Seed);
 			for (int y = 0; y < universe.GetLength(1); y++)
 			{
 				for (int x = 0; x < universe.GetLength(0); x++)
 				{
 					if (isSeed)
 					{
+						int num = rand2.Next(0, 2);
+						if (num == 0)
+						{
+							universe[x, y] = true;
 
+						}
+						else
+						{
+							universe[x, y] = false;
+
+						}
 					}
 					else
 					{
@@ -238,6 +255,7 @@ namespace KRGOL
 					}
 				}
 			}
+			graphicsPanel1.Invalidate();
 
 		}
 
@@ -441,5 +459,47 @@ namespace KRGOL
 				graphicsPanel1.Invalidate();
 			}
 		}
+
+        private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			RandomizeDialog dlg = new RandomizeDialog();
+			// Set the properties
+			// Suscribe to the Apply event
+			dlg.Apply += new RandomizeDialog.ApplyEventHandler(dlg_Apply);
+			if (DialogResult.OK == dlg.ShowDialog())
+			{
+				Randomize(true);
+			}
+
+		}
+
+		void dlg_Apply(object sender, ApplyEventArgs e)
+		{
+			// Retrieve the event arguements
+			Seed = e.Seed;
+		}
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void universeSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			UniverseSize universeSize = new UniverseSize();
+			universeSize.Apply += new UniverseSize.ApplyEventHandler(universeSize_Apply);
+			if (DialogResult.OK == universeSize.ShowDialog())
+			{
+				universe = new bool[width, height];
+				graphicsPanel1.Invalidate();
+			}
+		}
+		void universeSize_Apply(object sender, ApplyEventArgs2 e)
+		{
+			// Retrieve the event arguements
+			width = e.Width;
+			height = e.Height;
+		}
+
 	}
 }
