@@ -30,10 +30,12 @@ namespace KRGOL
 
 		// Generation count
 		int generations = 0;
-
+		//Randomization Seed
 		int Seed;
-		int width;
-		int height;
+		//Universe Width
+		int width = 5;
+		//Universe Height
+		int height = 5;
 
 		public Form1()
 		{
@@ -219,12 +221,15 @@ namespace KRGOL
 
 		private void Randomize(bool isSeed)
 		{
+			//Randomize Based on Time
 			Random rand = new Random();
+			//Randomize Based on Seed
 			Random rand2 = new Random(Seed);
 			for (int y = 0; y < universe.GetLength(1); y++)
 			{
 				for (int x = 0; x < universe.GetLength(0); x++)
 				{
+					//If bool is true it is a seed and must use seed value for randomization
 					if (isSeed)
 					{
 						int num = rand2.Next(0, 2);
@@ -239,6 +244,7 @@ namespace KRGOL
 
 						}
 					}
+					//otherwise just randomly choose the number
 					else
 					{
 						int num = rand.Next(0, 2);
@@ -468,6 +474,7 @@ namespace KRGOL
 			dlg.Apply += new RandomizeDialog.ApplyEventHandler(dlg_Apply);
 			if (DialogResult.OK == dlg.ShowDialog())
 			{
+				//Randomizes Based on Seed
 				Randomize(true);
 			}
 
@@ -475,7 +482,7 @@ namespace KRGOL
 
 		void dlg_Apply(object sender, ApplyEventArgs e)
 		{
-			// Retrieve the event arguements
+			// Retrieve the Seed
 			Seed = e.Seed;
 		}
 
@@ -486,11 +493,14 @@ namespace KRGOL
 
         private void universeSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+			//Create Universe Size Dialog Menu
 			UniverseSize universeSize = new UniverseSize();
 			universeSize.Apply += new UniverseSize.ApplyEventHandler(universeSize_Apply);
 			if (DialogResult.OK == universeSize.ShowDialog())
 			{
+				//Resize Universe
 				universe = new bool[width, height];
+				//Invalidate
 				graphicsPanel1.Invalidate();
 			}
 		}
